@@ -38,9 +38,15 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Backgrounds
-    uniqueID: 3226087773
-    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Sky
+    uniqueID: 770519723
+    locked: 0
+  - name: Sea
+    uniqueID: 3075512065
+    locked: 0
+  - name: Beach
+    uniqueID: 2302788833
     locked: 0

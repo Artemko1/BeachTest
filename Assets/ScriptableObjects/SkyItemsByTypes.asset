@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e211d341e2444d9f91988818159fb0c7, type: 3}
+  m_Name: SkyItemsByTypes
+  m_EditorClassIdentifier: 
+  itemsByTypes:
+  - type: 0
+    items:
+    - {fileID: 21300000, guid: ee1bc57d706b14a4892183d9534b4274, type: 3}
+    - {fileID: 21300000, guid: dccef762b7d4f714aaf5bc89551da5fa, type: 3}
+    - {fileID: 21300000, guid: fb11f77e03dd8ad4ca03b510c558bfb9, type: 3}
+    - {fileID: 21300000, guid: d071af20567acdf48a4f4664863873b6, type: 3}
+    sortOrder: 0
+    maxNumber: 0
+  - type: 1
+    items:
+    - {fileID: 21300000, guid: 43f41a532a8ddfd498c80eebab555991, type: 3}
+    sortOrder: -100
+    maxNumber: 1
+  - type: 3
+    items:
+    - {fileID: 21300000, guid: c80b8ca19184e3d4aabfd464303f1672, type: 3}
+    sortOrder: 10
+    maxNumber: 2

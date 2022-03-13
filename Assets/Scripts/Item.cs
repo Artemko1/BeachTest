@@ -24,6 +24,14 @@ namespace BeachTest
             }
         }
 
+        public void SetSortingLayerID(int id)
+        {
+            if (spriteRenderer)
+            {
+                spriteRenderer.sortingLayerID = id;
+            }
+        }
+
         private void Awake()
         {
             spriteRenderer = GetComponent<SpriteRenderer>();

@@ -11,6 +11,11 @@ namespace BeachTest
         public Sprite[] items;
         
         /// <summary>
+        /// Sort order for this specific type (group) of items
+        /// </summary>
+        public int sortOrder;
+        
+        /// <summary>
         /// Max number of this type of item allowed to exist simultaneously.
         /// </summary>
         public int maxNumber;

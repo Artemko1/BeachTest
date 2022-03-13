@@ -1,25 +1,33 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.Serialization;
+using UnityEngine.Assertions;
 using Random = UnityEngine.Random;
 
 namespace BeachTest
 {
     public class Region : MonoBehaviour
     {
-        [FormerlySerializedAs("itemsData"), SerializeField]
-        private ItemsByType[] itemsDataByTypes = null;
-
+        [SerializeField] private ItemsByTypesSO itemsByTypesSO = null;
         [SerializeField] private Item itemPrefab = null;
+
         [SerializeField] private int maxItemsOnRegion = 5;
-        [SerializeField] private int itemsSortingOrderInLayer = 0;
 
         /// <summary>
         /// Pool of currently created items.
         /// </summary>
         private readonly List<Item> spawnedItems = new List<Item>();
 
+        private int sortingLayerID = 0;
+
+        private void Awake()
+        {
+            var rend = GetComponent<SpriteRenderer>();
+            if (rend)
+            {
+                sortingLayerID = rend.sortingLayerID;
+            }
+        }
 
         private void OnMouseDown()
         {
@@ -29,16 +37,11 @@ namespace BeachTest
                 spawnedItems.RemoveAt(0);
             }
 
-            PlaceRandomItem();
+            PlaceItem();
         }
 
-        private void PlaceRandomItem()
+        private void PlaceItem()
         {
-            if (itemsDataByTypes == null || itemsDataByTypes.Length <= 0)
-            {
-                return;
-            }
-
             var isFound = FindAllowedItemsByType(out var itemsByType);
             if (!isFound)
             {
@@ -51,8 +54,10 @@ namespace BeachTest
             var spawnedItem = Instantiate(itemPrefab, mouseWorldPosition, Quaternion.identity);
 
             spawnedItem.SetSprite(itemsByType.GetRandomSprite());
-            spawnedItem.SetSortingOrder(itemsSortingOrderInLayer);
+            spawnedItem.SetSortingOrder(itemsByType.sortOrder);
+            spawnedItem.SetSortingLayerID(sortingLayerID);
             spawnedItem.Type = itemsByType.type;
+
             spawnedItems.Add(spawnedItem);
         }
 
@@ -63,7 +68,10 @@ namespace BeachTest
         /// <returns></returns>
         private bool FindAllowedItemsByType(out ItemsByType itemsByType)
         {
-            var remainingTypes = itemsDataByTypes.ToList();
+            Assert.IsNotNull(itemsByTypesSO, "itemsByTypesSO != null");
+            Assert.IsNotNull(itemsByTypesSO.ItemsByTypes, "itemsByTypesSO.ItemsByTypes != null");
+
+            var remainingTypes = itemsByTypesSO.ItemsByTypes.ToList();
             itemsByType = new ItemsByType();
 
             while (true)
